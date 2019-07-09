@@ -1,0 +1,8 @@
+div.perf-gears svg {
+    height: 16px;
+    fill: #007bff
+}
+
+a.nav-link.active div.perf-gears svg {
+    fill: #495057
+}
