@@ -19,6 +19,9 @@ export const PREFERENCE_SECTION = 'PREFERENCE';
 
 export const LOAD_INITIAL_DATA = 'LOAD_INITIAL_DATA';
 
+export const UPDATE_PREFERENCES = 'UPDATE_PREFERENCES';
+export const LOAD_INITIAL_PREFERENCES = 'LOAD_INITIAL_PREFERENCES';
+
 export const addStatement = (empoweringText) => {
     return {
         type: ADD_STATEMENT,
@@ -132,6 +135,24 @@ export const removeAction = (statementIndex, actionIndex) => {
         data: {
             statementIndex,
             actionIndex
+        }
+    }
+}
+
+export const updatePreferences = (preferences) => {
+    return {
+        type: UPDATE_PREFERENCES,
+        data: {
+            preferences
+        }
+    }
+}
+
+export const loadInitialPreferences = (preferences) => {
+    return {
+        type: LOAD_INITIAL_PREFERENCES,
+        data: {
+            preferences
         }
     }
 }

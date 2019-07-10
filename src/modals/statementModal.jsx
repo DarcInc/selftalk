@@ -55,7 +55,7 @@ class AddStatement extends React.Component {
                         </Form.Group>
                         <Form.Group controlId='empoweringBelief'>
                             <Form.Label>Empowring Belief</Form.Label>
-                            <Form.Control type='text' value={this.state.empoweringBelief} onChange={this.handleEmpoweringBeliefChanged} />
+                            <Form.Control as='textarea' type='text' value={this.state.empoweringBelief} onChange={this.handleEmpoweringBeliefChanged} />
                             <Form.Text className='text-muted'>Restate your limiting belief as an empowering belief (e.g. 'I sometimes finish things')</Form.Text>
                         </Form.Group>
                     </Form>

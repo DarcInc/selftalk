@@ -11,6 +11,8 @@ import {CHANGE_SECTION, BELIEFS_SECTION, changeSection} from './actions';
 
 import {LOAD_INITIAL_DATA, loadInitialData} from './actions';
 
+import {UPDATE_PREFERENCES, LOAD_INITIAL_PREFERENCES, updatePreferences, loadInitialPreferences} from './actions';
+
 describe('Statements', () => {
     it('should create a new statement to add', () => {
         let action = addStatement('statement text');
@@ -101,5 +103,19 @@ describe('Initial Data', () => {
         expect(action.data.statements).toStrictEqual(
             [{text: 'foo', evidence: [], actions: []}]
         )
+    });
+});
+
+describe('Preferences', () => {
+    it('should update preferences', () => {
+        let action = updatePreferences({showHelp: true});
+        expect(action.type).toBe(UPDATE_PREFERENCES);
+        expect(action.data.preferences).toStrictEqual({showHelp: true});
+    });
+
+    it('should load initial preferences', () => {
+        let action = loadInitialPreferences({showHelp: true});
+        expect(action.type).toBe(LOAD_INITIAL_PREFERENCES);
+        expect(action.data.preferences).toStrictEqual({showHelp: true});
     });
 });

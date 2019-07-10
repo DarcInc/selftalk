@@ -44,7 +44,9 @@ class AddEvidence extends React.Component {
                         <Form.Group controlId='evidence'>
                             <Form.Label>Evidence</Form.Label>
                             <Form.Control type='text' as='textarea' value={this.state.evidence} onChange={this.handleEvidenceChanged} />
-                            <Form.Text className='text-muted'>Add evidence that supports your belief.</Form.Text>
+                            <Form.Text className='text-muted'>Add evidence that supports your belief.  For example, 
+                                if you don't feel like you finish things, add examples of when you finished something.
+                            </Form.Text>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

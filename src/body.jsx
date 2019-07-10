@@ -2,7 +2,7 @@ import React from 'react';
 import Statements from './redux/components/statements';
 import Actions from './redux/components/actions';
 import Evidence from './redux/components/evidence';
-import Preferences from './preferences';
+import Preferences from './redux/components/preferences';
 
 import { BELIEFS_SECTION, EVIDENCE_SECTION, ACTIONS_SECTION, PREFERENCE_SECTION } from './redux/actions';
 
