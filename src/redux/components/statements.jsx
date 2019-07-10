@@ -4,7 +4,8 @@ import Statements from '../../statements';
 
 const mapStateToProps = state => ({
     statements: state.statements,
-    currentStatement: state.currentStatement
+    currentStatement: state.currentStatement,
+    preferences: state.preferences
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

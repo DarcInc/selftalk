@@ -33,6 +33,18 @@ class AddEvidence extends React.Component {
         this.props.close();
     }
 
+    helpText() {
+        if (this.props.preferences.showHelp) {
+            return [
+                "Add evidence that supports your belief.  For example, ",
+                "if you don't feel like you finish things, add examples of ",
+                "when you finished something.  (e.g. Last summer I repainted",
+                "the guest room)."
+            ].join(' ');
+        }
+        return "Add evidence that supports your belief.";
+    }
+
     render() {
         return (
             <Modal show={this.props.dialog} onExiting={this.clearState}>
@@ -44,9 +56,7 @@ class AddEvidence extends React.Component {
                         <Form.Group controlId='evidence'>
                             <Form.Label>Evidence</Form.Label>
                             <Form.Control type='text' as='textarea' value={this.state.evidence} onChange={this.handleEvidenceChanged} />
-                            <Form.Text className='text-muted'>Add evidence that supports your belief.  For example, 
-                                if you don't feel like you finish things, add examples of when you finished something.
-                            </Form.Text>
+                            <Form.Text className='text-muted'>{this.helpText()}</Form.Text>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

@@ -31,6 +31,17 @@ class AddAction extends React.Component {
         this.props.close();
     }
 
+    helpText() {
+        if (this.props.preferences.showHelp) {
+            return [
+                "Specify an action you can take to help foster that belief.",
+                "Try to make sure it's simple, you can easily measure success, easily achievable, and limit the",
+                "amount of time you give yourself."
+            ].join(' ');
+        } 
+        return "What can you do to reinforce your belief?"
+    }
+
     render() {
         return (
             <Modal show={this.props.dialog} onExiting={this.clearState}>
@@ -42,9 +53,7 @@ class AddAction extends React.Component {
                         <Form.Group controlId='action'>
                             <Form.Label>Action</Form.Label>
                             <Form.Control as='textarea' value={this.state.action} onChange={this.handleActionChanged} />
-                            <Form.Text className='text-muted'>Specify an action you can take to help foster that belief.  
-                            Try to make sure it's simple, you can easily measure success, easily achievable, and limit the 
-                            amount of time you give yourself.</Form.Text>
+                            <Form.Text className='text-muted'>{this.helpText()}</Form.Text>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

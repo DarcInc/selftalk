@@ -3,7 +3,8 @@ import evidenceModal from '../../modals/evidenceModal';
 import { addEvidence } from '../actions';
 
 const mapStateToProps = state => ({
-    statementIndex: state.currentStatement
+    statementIndex: state.currentStatement,
+    preferences: state.preferences
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
