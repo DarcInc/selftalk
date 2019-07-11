@@ -35,7 +35,7 @@ class Statements extends React.Component {
         })
     }
 
-    helpText() {
+    helpBanner() {
         if (this.props.preferences.showHelp) {
             return (
                 <Row className='text-muted small'>
@@ -142,10 +142,21 @@ class Statements extends React.Component {
         return '';
     }
 
+    helpText() {
+        if (this.props.preferences.showHelp) {
+            return [
+                "Create a statement to build an empowering belief or select",
+                "an existing statement.  Then add evidence to reinforce that",
+                "belief and actions you can take to build that belief."
+            ].join(" ");
+        }
+        return "Create a statement to build an empowering belief."
+    }
+
     render() {
         return (
             <Container>
-                {this.helpText()}
+                {this.helpBanner()}
                 {this.inlineHelp()}
                 <Row>
                     <Col>
@@ -153,11 +164,7 @@ class Statements extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col className='small'>
-                        Create a statement to build an empowering belief or select
-                        an existing statement.  Then add evidence to reinforce that
-                        belief and actions you can take to build that belief.
-                    </Col>
+                    <Col className='small'>{this.helpText()}</Col>
                 </Row>
                 <Row>
                     <Col>
