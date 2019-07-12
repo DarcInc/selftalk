@@ -65,7 +65,7 @@ class Actions extends React.Component {
                     <Row>
                         <Col>
                             <ButtonGroup>
-                                <Button variant='secondary' onClick={this.handleUpdate}>Update</Button>
+                                <Button variant='secondary' onClick={this.handleUpdate}>{this.state.updating ? 'Save' : 'Update'}</Button>
                                 <Button variant='danger' onClick={this.handleRemove}>Remove</Button>
                             </ButtonGroup>
                         </Col>
