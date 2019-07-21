@@ -1,6 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, ListGroup, Form, ButtonGroup, Button } from 'react-bootstrap';
 
+const FREQUENTLY = 'frequently';
+const INFREQUENTLY = 'infrequently';
+const ONCE = 'once';
+
 class Actions extends React.Component {
     constructor(props) {
         super(props);
@@ -8,11 +12,13 @@ class Actions extends React.Component {
         this.state = {
             updating: false,
             selected: -1,
-            newAction: ''
+            newAction: '',
+            newFrequency: 'once'
         };
 
         this.handleSelectAction = this.handleSelectAction.bind(this);
         this.handleUpdateAction = this.handleUpdateAction.bind(this);
+        this.handleUpdateFrequency = this.handleUpdateFrequency.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
     }
@@ -20,7 +26,9 @@ class Actions extends React.Component {
     handleSelectAction(index) {
         this.setState({
             selected: index,
-            newAction: this.props.statement.actions[index]
+            newAction: this.props.statement.actions[index].text,
+            newFrequency: this.props.statement.actions[index].frequency,
+            updating: false
         });
     }
 
@@ -32,7 +40,12 @@ class Actions extends React.Component {
 
     handleUpdate() {
         if (this.state.updating) {
-            this.props.update(this.props.statementIndex, this.state.selected, this.state.newAction);
+            let update = {
+                text: this.state.newAction,
+                frequency: this.state.newFrequency
+            };
+
+            this.props.update(this.props.statementIndex, this.state.selected, update);
         }
 
         this.setState({
@@ -48,17 +61,57 @@ class Actions extends React.Component {
         });
     }
 
+    showFrequency(item) {
+        switch(item.frequency) {
+            case ONCE:
+                return (<Row><Col>Once</Col></Row>)
+            case INFREQUENTLY:
+                return (<Row><Col>Infrequently</Col></Row>)
+            case FREQUENTLY:
+                return (<Row><Col>Frequently</Col></Row>)
+        }
+    }
+
+    handleUpdateFrequency(newFrequency) {
+        this.setState({
+            newFrequency: newFrequency
+        });
+    }
+
+    printFrequency(frequency) {
+        switch(frequency) {
+            case ONCE:
+                return 'Once';
+            case INFREQUENTLY:
+                return 'Infrequently';
+            case FREQUENTLY:
+                return 'Frequently'
+        }
+    }
+
     render() {
         let actions = this.props.statement.actions.map((i, idx) => {
             if (idx === this.state.selected) {
                 return (<ListGroup.Item className='bg-dark' key={idx} active={true}>
                     <Row hidden={this.state.updating}>
-                        <Col><b>{i}</b></Col>
+                        <Col>
+                            <Row>
+                                <Col><b>{i.text}</b></Col>
+                            </Row>
+                            <Row>
+                                <Col>{this.printFrequency(i.frequency)}</Col>
+                            </Row>
+                        </Col>
                     </Row>
                     <Row hidden={!this.state.updating}>
                         <Col>
                             <Form.Group controlId='action'>
                                 <Form.Control as='textarea' value={this.state.newAction} onChange={this.handleUpdateAction} />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Check type='radio' id='frequency' name='once' checked={this.state.newFrequency === ONCE} label='I want to do this once.' onClick={e => this.handleUpdateFrequency(ONCE)} />
+                                <Form.Check type='radio' id='frequency' name='infrequently' checked={this.state.newFrequency === INFREQUENTLY} label='I want to do this once in a while.' onClick={e => this.handleUpdateFrequency(INFREQUENTLY)} />
+                                <Form.Check type='radio' id='frequency' name='frequently' checked={this.state.newFrequency === FREQUENTLY} label='I want to do this often.' onClick={e => this.handleUpdateFrequency(FREQUENTLY)} />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -72,7 +125,15 @@ class Actions extends React.Component {
                     </Row>
                 </ListGroup.Item>)
             } 
-            return (<ListGroup.Item onClick={e => this.handleSelectAction(idx)} key={idx}>{i}</ListGroup.Item>)
+            return (
+                <ListGroup.Item onClick={e => this.handleSelectAction(idx)} key={idx}>
+                    <Row>
+                        <Col>{i.text}</Col>
+                    </Row>
+                    <Row>
+                        <Col>{this.printFrequency(i.frequency)}</Col>
+                    </Row>
+                </ListGroup.Item>)
         });
         return (
             <Container>

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from './redux/reducers'
+import _ from 'lodash';
 
 import $ from 'jquery';
 import popper from 'popper.js'
@@ -44,7 +45,10 @@ let store = createStore(reducer, composeWithDevTools(
 ));
 
 if (window.localStorage.getItem('statements')) {
+    const upgradeActions = actionList => actionList.map(action => _.isString(action) ? {text: action, frequency: 'infrequently'} : action);
+    
     let statements = JSON.parse(window.localStorage.getItem('statements'));
+    statements = statements.map(statement => Object.assign({}, statement, {actions: upgradeActions(statement.actions)}));
     store.dispatch(loadInitialData(statements));
 }
 

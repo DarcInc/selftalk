@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onClickAdd: (statementIndex, text) => dispatch(addAction(statementIndex, text))
+    onClickAdd: (statementIndex, action) => dispatch(addAction(statementIndex, action))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(actionsModal);

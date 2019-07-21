@@ -104,32 +104,49 @@ describe('Evidence', () => {
 });
 
 describe('Actions', () => {
+    const actionList = () => {
+        return [
+            {
+                text: 'action 1',
+                frequency: 'once'
+            },
+            {
+                text: 'action 2',
+                frequency: 'infrequently'
+            },
+            {
+                text: 'action 3',
+                frequency: 'frequently'
+            }
+        ]
+    };
+
     const generateStatementList = () => {
         return [
             {text: 'statement 1', evidence: [], actions: []},
-            {text: 'statement 2', evidence: [], actions: ['action 1', 'action 2', 'action 3']},
+            {text: 'statement 2', evidence: [], actions: actionList()},
             {text: 'statement 3', evidence: [], actions: []}
         ]
     };
 
     it('should add new actions', () => {
         let state = generateStatementList();
-        let action = addAction(0, 'take an action');
+        let action = addAction(0, {text: 'take an action', frequency: 'once'});
 
         let newState = statements(state, action);
         expect(newState.length).toBe(3);
         expect(newState[0].actions.length).toBe(1);
-        expect(newState[0].actions[0]).toBe('take an action');
+        expect(newState[0].actions[0]).toStrictEqual({text: 'take an action', frequency: 'once'});
     });
 
     it('should update an action', () => {
         let state = generateStatementList();
-        let action = updateAction(1, 0, 'new text');
+        let action = updateAction(1, 0, {text:'new text', frequency:'frequently'});
 
         let newState = statements(state, action);
         expect(newState.length).toBe(3);
         expect(newState[1].actions.length).toBe(3);
-        expect(newState[1].actions[0]).toBe('new text');
+        expect(newState[1].actions[0]).toStrictEqual({text:'new text', frequency:'frequently'});
     });
 
     it('should remove an existing action', () => {
@@ -139,8 +156,8 @@ describe('Actions', () => {
         let newState = statements(state, action);
         expect(newState.length).toBe(3);
         expect(newState[1].actions.length).toBe(2);
-        expect(newState[1].actions[0]).toBe('action 1');
-        expect(newState[1].actions[1]).toBe('action 3');
+        expect(newState[1].actions[0]).toStrictEqual({text: 'action 1',frequency: 'once'});
+        expect(newState[1].actions[1]).toStrictEqual({text: 'action 3',frequency: 'frequently'});
     });
 });
 
