@@ -12,7 +12,7 @@ class AddAction extends React.Component {
         this.state = {
             action: "",
             frequency: INFREQUENTLY
-        }
+        };
 
         this.handleActionChanged = this.handleActionChanged.bind(this);
         this.clearState = this.clearState.bind(this);
@@ -84,9 +84,9 @@ class AddAction extends React.Component {
                             <Form.Text className='text-muted'>{this.helpText()}</Form.Text>
                         </Form.Group>
                         <Form.Group controlId='frequency'>
-                            <Form.Check type='radio' id='frequently' name='frequency' label='I want to do this regularly' checked={this.state.frequency === FREQUENTLY} onClick={e => this.changeFrequency(FREQUENTLY)}/>
-                            <Form.Check type='radio' id='infrequently' name='frequency' label='I want to do this once in a while' checked={this.state.frequency === INFREQUENTLY} onClick={e => this.changeFrequency(INFREQUENTLY)}/>
-                            <Form.Check type='radio' id='once' name='frequency' label='I just want to do this once' checked={this.state.frequency === ONCE} onClick={e => this.changeFrequency(ONCE)} />
+                            <Form.Check type='radio' id='frequently' name='frequency' label='I want to do this regularly' checked={this.state.frequency === FREQUENTLY} onClick={() => this.changeFrequency(FREQUENTLY)}/>
+                            <Form.Check type='radio' id='infrequently' name='frequency' label='I want to do this once in a while' checked={this.state.frequency === INFREQUENTLY} onClick={()=> this.changeFrequency(INFREQUENTLY)}/>
+                            <Form.Check type='radio' id='once' name='frequency' label='I just want to do this once' checked={this.state.frequency === ONCE} onClick={() => this.changeFrequency(ONCE)} />
                             <Form.Text className='text-muted'>{this.frequencyHelp()}</Form.Text>
                         </Form.Group>
                     </Form>

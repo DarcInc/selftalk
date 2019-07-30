@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
     statement: state.statements[state.currentStatement]
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     handleDelete: index => dispatch(removeStatement(index)),
     handleUpdate: (statementIndex, text) => dispatch(updateStatement(statementIndex, text))
 });

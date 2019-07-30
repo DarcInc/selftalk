@@ -8,7 +8,7 @@ class AddStatement extends React.Component {
         this.state = {
             limitingBelief: "",
             empoweringBelief: "",
-        }
+        };
 
         this.handleEmpoweringBeliefChanged = this.handleEmpoweringBeliefChanged.bind(this);
         this.handleLimitingBeliefChanged = this.handleLimitingBeliefChanged.bind(this);
@@ -88,7 +88,7 @@ class AddStatement extends React.Component {
             </Modal>
         );
     };
-};
+}
 
 
 export default AddStatement;

@@ -29,7 +29,7 @@ export const addStatement = (empoweringText) => {
             statement: empoweringText
         }
     }
-}
+};
 
 export const removeStatement = (index) => {
     return {
@@ -38,7 +38,7 @@ export const removeStatement = (index) => {
             removeIndex: index
         }
     }
-}
+};
 
 export const selectStatement = (index) => {
     return {
@@ -47,7 +47,7 @@ export const selectStatement = (index) => {
             selectedIndex: index
         }
     }
-}
+};
 
 export const addEvidence = (statementIndex, evidenceText) => {
     return {
@@ -57,7 +57,7 @@ export const addEvidence = (statementIndex, evidenceText) => {
             evidence: evidenceText
         }
     }
-}
+};
 
 export const addAction = (statementIndex, actionText) => {
     return {
@@ -67,7 +67,7 @@ export const addAction = (statementIndex, actionText) => {
             action: actionText
         }
     }
-}
+};
 
 export const changeSection = (section) => {
     return {
@@ -76,7 +76,7 @@ export const changeSection = (section) => {
             section
         }
     }
-}
+};
 
 export const loadInitialData = (statements) => {
     return {
@@ -85,7 +85,7 @@ export const loadInitialData = (statements) => {
             statements
         }
     }
-}
+};
 
 export const updateStatement = (statementIndex, text) => {
     return {
@@ -95,7 +95,7 @@ export const updateStatement = (statementIndex, text) => {
             text
         }
     }
-}
+};
 
 export const updateEvidence = (statementIndex, evidenceIndex, text) => {
     return {
@@ -106,7 +106,7 @@ export const updateEvidence = (statementIndex, evidenceIndex, text) => {
             text
         }
     }
-}
+};
 
 export const removeEvidence = (statementIndex, evidenceIndex) => {
     return {
@@ -116,7 +116,7 @@ export const removeEvidence = (statementIndex, evidenceIndex) => {
             evidenceIndex
         }
     }
-}
+};
 
 export const updateAction = (statementIndex, actionIndex, text) => {
     return {
@@ -127,7 +127,7 @@ export const updateAction = (statementIndex, actionIndex, text) => {
             text
         }
     }
-}
+};
 
 export const removeAction = (statementIndex, actionIndex) => {
     return {
@@ -137,7 +137,7 @@ export const removeAction = (statementIndex, actionIndex) => {
             actionIndex
         }
     }
-}
+};
 
 export const updatePreferences = (preferences) => {
     return {
@@ -146,7 +146,7 @@ export const updatePreferences = (preferences) => {
             preferences
         }
     }
-}
+};
 
 export const loadInitialPreferences = (preferences) => {
     return {
@@ -155,4 +155,4 @@ export const loadInitialPreferences = (preferences) => {
             preferences
         }
     }
-}
+};

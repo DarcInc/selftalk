@@ -4,9 +4,9 @@ import { addStatement } from '../actions';
 
 const mapStateToProps = state => ({
     preferences: state.preferences
-})
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     onClickAdd: (text) => dispatch(addStatement(text))
 });
 

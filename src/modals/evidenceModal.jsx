@@ -7,7 +7,7 @@ class AddEvidence extends React.Component {
 
         this.state = {
             evidence: ""
-        }
+        };
 
         this.handleEvidenceChanged = this.handleEvidenceChanged.bind(this);
         this.clearState = this.clearState.bind(this);

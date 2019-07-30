@@ -2,7 +2,7 @@ import {ADD_STATEMENT, REMOVE_STATEMENT, UPDATE_STATEMENT, ADD_EVIDENCE, ADD_ACT
     LOAD_INITIAL_DATA, 
     UPDATE_EVIDENCE, REMOVE_EVIDENCE, UPDATE_ACTION, REMOVE_ACTION } from '../actions';
 
-const initialState = []
+const initialState = [];
 
 const createStatement = (statementText) => {
     return {
@@ -22,7 +22,7 @@ const addEvidence = (statement, evidence) => {
 
 const addAction = (statement, action) => {
     return Object.assign({}, statement, {actions: [...statement.actions, action]});
-}
+};
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
@@ -84,7 +84,7 @@ const reducer = (state = initialState, action) => {
         case REMOVE_STATEMENT:
             return removeStatement(state, action.data.removeIndex);
         case ADD_STATEMENT:
-            return [...state, createStatement(action.data.statement)]
+            return [...state, createStatement(action.data.statement)];
         default:
             return state;
     }

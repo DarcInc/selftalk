@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
     preferences: state.preferences
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     update: preferences => dispatch(updatePreferences(preferences))
 });
 

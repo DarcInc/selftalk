@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
     preferences: state.preferences
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     selectStatement: idx => dispatch(selectStatement(idx))
 });
 

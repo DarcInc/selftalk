@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
     preferences: state.preferences
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     onClickAdd: (statementIndex, action) => dispatch(addAction(statementIndex, action))
 });
 
