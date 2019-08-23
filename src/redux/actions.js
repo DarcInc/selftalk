@@ -22,6 +22,8 @@ export const LOAD_INITIAL_DATA = 'LOAD_INITIAL_DATA';
 export const UPDATE_PREFERENCES = 'UPDATE_PREFERENCES';
 export const LOAD_INITIAL_PREFERENCES = 'LOAD_INITIAL_PREFERENCES';
 
+export const ACTION_COMPLETE = 'ACTION_COMPLETE';
+
 export const addStatement = (empoweringText) => {
     return {
         type: ADD_STATEMENT,
@@ -156,3 +158,13 @@ export const loadInitialPreferences = (preferences) => {
         }
     }
 };
+
+export const actionComplete = (statementIndex, actionIndex) => {
+    return {
+        type: ACTION_COMPLETE,
+        data: {
+            statementIndex,
+            actionIndex
+        }
+    };
+}

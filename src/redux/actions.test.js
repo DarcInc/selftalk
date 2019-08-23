@@ -13,6 +13,8 @@ import {LOAD_INITIAL_DATA, loadInitialData} from './actions';
 
 import {UPDATE_PREFERENCES, LOAD_INITIAL_PREFERENCES, updatePreferences, loadInitialPreferences} from './actions';
 
+import {ACTION_COMPLETE, actionComplete} from './actions';
+
 describe('Statements', () => {
     it('should create a new statement to add', () => {
         let action = addStatement('statement text');
@@ -117,5 +119,14 @@ describe('Preferences', () => {
         let action = loadInitialPreferences({showHelp: true});
         expect(action.type).toBe(LOAD_INITIAL_PREFERENCES);
         expect(action.data.preferences).toStrictEqual({showHelp: true});
+    });
+});
+
+describe('Completing Actions', () => {
+    it('should complete an action', () => {
+        let action = actionComplete(1, 3);
+        expect(action.type).toBe(ACTION_COMPLETE);
+        expect(action.data.statementIndex).toBe(1);
+        expect(action.data.actionIndex).toBe(3);
     });
 });

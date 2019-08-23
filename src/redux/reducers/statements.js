@@ -1,6 +1,7 @@
 import {ADD_STATEMENT, REMOVE_STATEMENT, UPDATE_STATEMENT, ADD_EVIDENCE, ADD_ACTION,
     LOAD_INITIAL_DATA, 
-    UPDATE_EVIDENCE, REMOVE_EVIDENCE, UPDATE_ACTION, REMOVE_ACTION } from '../actions';
+    UPDATE_EVIDENCE, REMOVE_EVIDENCE, UPDATE_ACTION, REMOVE_ACTION,
+    ACTION_COMPLETE } from '../actions';
 
 const initialState = [];
 
@@ -22,6 +23,17 @@ const addEvidence = (statement, evidence) => {
 
 const addAction = (statement, action) => {
     return Object.assign({}, statement, {actions: [...statement.actions, action]});
+};
+
+const completeAction = (statement, actionIndex) => {
+    const action = statement.actions[actionIndex];
+    let completed = (action.completed ? [...action.completed, new Date()] : [new Date()]);
+
+    let newAction = Object.assign({}, action, {completed});
+
+    return Object.assign({}, statement, {actions: statement.actions.map((a, idx) => {
+        return idx === actionIndex ? newAction : a;
+    })});
 };
 
 const reducer = (state = initialState, action) => {
@@ -85,6 +97,14 @@ const reducer = (state = initialState, action) => {
             return removeStatement(state, action.data.removeIndex);
         case ADD_STATEMENT:
             return [...state, createStatement(action.data.statement)];
+        case ACTION_COMPLETE:
+            return state.map((s, idx) => {
+                if (idx === action.data.statementIndex) {
+                    return completeAction(s, action.data.actionIndex);
+                } else {
+                    return s;
+                }
+            });
         default:
             return state;
     }

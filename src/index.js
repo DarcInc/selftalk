@@ -13,7 +13,7 @@ import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ADD_STATEMENT, ADD_ACTION, ADD_EVIDENCE, REMOVE_STATEMENT, loadInitialData, 
     UPDATE_STATEMENT, UPDATE_EVIDENCE, REMOVE_EVIDENCE, UPDATE_ACTION, REMOVE_ACTION, 
-    UPDATE_PREFERENCES, 
+    UPDATE_PREFERENCES, ACTION_COMPLETE,
     loadInitialPreferences} from './redux/actions';
 
 const saver = store => next => action => {
@@ -28,6 +28,7 @@ const saver = store => next => action => {
         case REMOVE_EVIDENCE:
         case UPDATE_ACTION:
         case REMOVE_ACTION:
+        case ACTION_COMPLETE:
             let statements = store.getState().statements;
             window.localStorage.setItem("statements", JSON.stringify(statements));
             break;
@@ -45,10 +46,18 @@ let store = createStore(reducer, composeWithDevTools(
 ));
 
 if (window.localStorage.getItem('statements')) {
-    const upgradeActions = actionList => actionList.map(action => _.isString(action) ? {text: action, frequency: 'infrequently'} : action);
+    const parseDates = actionList => {
+        return actionList.map(action => {
+            if (action.completed) {
+                return Object.assign({}, action, {completed: action.completed.map(date => new Date(date))});
+            } else {
+                return action;
+            }
+        })
+    }
     
     let statements = JSON.parse(window.localStorage.getItem('statements'));
-    statements = statements.map(statement => Object.assign({}, statement, {actions: upgradeActions(statement.actions)}));
+    statements = statements.map(statement => Object.assign({}, statement, {actions: parseDates(statement.actions)}));
     store.dispatch(loadInitialData(statements));
 }
 

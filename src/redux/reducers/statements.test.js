@@ -1,6 +1,7 @@
 import statements from './statements';
 import { addStatement, removeStatement, updateStatement, addEvidence, addAction,
-    loadInitialData, updateEvidence, removeEvidence, updateAction, removeAction } from '../actions'
+    loadInitialData, updateEvidence, removeEvidence, updateAction, removeAction,
+    actionComplete } from '../actions'
 
 describe('Statements', () => {
     describe('Adding statements', () => {
@@ -158,6 +159,17 @@ describe('Actions', () => {
         expect(newState[1].actions.length).toBe(2);
         expect(newState[1].actions[0]).toStrictEqual({text: 'action 1',frequency: 'once'});
         expect(newState[1].actions[1]).toStrictEqual({text: 'action 3',frequency: 'frequently'});
+    });
+
+    describe('Completing Actions', () => {
+        let state = generateStatementList();
+        let action = actionComplete(1, 2);
+
+        let newState = statements(state, action);
+        expect(newState.length).toBe(3);
+        expect(newState[1].actions.length).toBe(3);
+        expect(newState[1].actions[2].completed.length).toBe(1);
+        expect(newState[1].actions[2].completed[0].year).toBe((new Date()).year);
     });
 });
 

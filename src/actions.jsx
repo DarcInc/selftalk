@@ -21,6 +21,7 @@ class Actions extends React.Component {
         this.handleUpdateFrequency = this.handleUpdateFrequency.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleComplete = this.handleComplete.bind(this);
     }
 
     handleSelectAction(index) {
@@ -78,6 +79,10 @@ class Actions extends React.Component {
         });
     }
 
+    handleComplete() {
+        this.props.complete(this.props.statementIndex, this.state.selected);
+    }
+
     printFrequency(frequency) {
         switch(frequency) {
             case ONCE:
@@ -86,6 +91,19 @@ class Actions extends React.Component {
                 return 'Infrequently';
             case FREQUENTLY:
                 return 'Frequently'
+        }
+    }
+
+    printLastCompleted(action) {
+        if (action.completed) {
+            const lastCompletedDate = action.completed[action.completed.length - 1];
+            return (
+                <Row>
+                    <Col>Last completed: {lastCompletedDate.toLocaleDateString()}</Col>
+                </Row>
+            )
+        } else {
+            return (<></>)
         }
     }
 
@@ -98,9 +116,7 @@ class Actions extends React.Component {
                             <Row>
                                 <Col><b>{i.text}</b></Col>
                             </Row>
-                            <Row>
-                                <Col>{this.printFrequency(i.frequency)}</Col>
-                            </Row>
+                            {this.printLastCompleted(i)}
                         </Col>
                     </Row>
                     <Row hidden={!this.state.updating}>
@@ -119,6 +135,7 @@ class Actions extends React.Component {
                         <Col>
                             <ButtonGroup>
                                 <Button variant='secondary' onClick={this.handleUpdate}>{this.state.updating ? 'Save' : 'Update'}</Button>
+                                <Button variant='secondary' onClick={this.handleComplete}>Complete</Button>
                                 <Button variant='danger' onClick={this.handleRemove}>Remove</Button>
                             </ButtonGroup>
                         </Col>
@@ -130,9 +147,7 @@ class Actions extends React.Component {
                     <Row>
                         <Col>{i.text}</Col>
                     </Row>
-                    <Row>
-                        <Col>{this.printFrequency(i.frequency)}</Col>
-                    </Row>
+                    {this.printLastCompleted(i)}
                 </ListGroup.Item>)
         });
         return (
